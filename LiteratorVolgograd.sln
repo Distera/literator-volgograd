@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.960
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteratorVolgograd", "LiteratorVolgograd\LiteratorVolgograd.csproj", "{BDECCAA4-C8F7-4BBF-B368-23C4CD5C3914}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDECCAA4-C8F7-4BBF-B368-23C4CD5C3914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDECCAA4-C8F7-4BBF-B368-23C4CD5C3914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDECCAA4-C8F7-4BBF-B368-23C4CD5C3914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDECCAA4-C8F7-4BBF-B368-23C4CD5C3914}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33511064-43A9-4D22-AE17-27C824E94987}
+	EndGlobalSection
+EndGlobal
