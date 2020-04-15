@@ -10,6 +10,8 @@ namespace LiteratorVolgograd.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationContext db = new ApplicationContext();
+
         public IActionResult Index()
         {
             ViewData["Message"] = "*Последние посты из всех разделов*";
