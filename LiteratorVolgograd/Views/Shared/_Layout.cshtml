@@ -8,40 +8,40 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/bootstrap.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">LiteratorVolgograd</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">ГЛАВНАЯ</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">О СОЮЗЕ</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="News">НОВОСТИ</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Authors">АВТОРЫ</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Projects">ПРОЕКТЫ</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Publications">ПУБЛИКАЦИИ</a></li>
-                </ul>
-            </div>
+
+    <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Literator</a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarColor03" style="">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">ГЛАВНОЕ</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">О СОЮЗЕ</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="News">НОВОСТИ</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Authors">АВТОРЫ</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Projects">ПРОЕКТЫ</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Publications">ПУБЛИКАЦИИ</a></li>
+            </ul>
         </div>
     </nav>
 
     <div class="container body-content">
+        <br />
+        <h2>@ViewData["Title"]</h2>
+        <br />
         @RenderBody()
         <hr />
         <footer>

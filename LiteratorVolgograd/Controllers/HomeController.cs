@@ -44,6 +44,10 @@ namespace LiteratorVolgograd.Controllers
         {
             ViewData["Message"] = "*Список авторов*";
 
+            db.Authors.Add(new Author { FirstName = "Example" });
+
+            db.SaveChanges();
+
             return View();
         }
 
