@@ -5,6 +5,7 @@ namespace LiteratorVolgograd.Models
     public class ApplicationContext : DbContext
     {
         public DbSet<Author> Authors { get; set; }
+        public DbSet<News> News { get; set; }
 
         public ApplicationContext()
         {

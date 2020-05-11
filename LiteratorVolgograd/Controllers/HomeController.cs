@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LiteratorVolgograd.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LiteratorVolgograd.Controllers
 {
@@ -29,13 +30,6 @@ namespace LiteratorVolgograd.Controllers
         public IActionResult Contact()
         {
             ViewData["Message"] = "*Контакты: почта, телефон и т.д.*";
-
-            return View();
-        }
-
-        public IActionResult News()
-        {
-            ViewData["Message"] = "*Список новостей*";
 
             return View();
         }

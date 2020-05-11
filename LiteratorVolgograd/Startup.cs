@@ -25,8 +25,6 @@ namespace LiteratorVolgograd
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -52,6 +50,10 @@ namespace LiteratorVolgograd
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                   name: "news",
+                   template: "{controller=News}/{action=News}/{id?}");
             });
         }
     }
