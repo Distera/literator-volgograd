@@ -15,7 +15,7 @@ namespace LiteratorVolgograd.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<News> news = db.News;
+            var news = db.News;
             ViewBag.News = news.OrderByDescending(s => s.Date);
 
             return View();
@@ -43,7 +43,7 @@ namespace LiteratorVolgograd.Controllers
         [HttpPost]
         public IActionResult UpdateNews(int id, string title, string content)
         {
-            News news = db.News.Find(id);
+            var news = db.News.Find(id);
 
             news.Title = title ?? DefoltTitle;
             news.Content = content;
@@ -54,7 +54,7 @@ namespace LiteratorVolgograd.Controllers
 
         public IActionResult ViewNews(int id)
         {
-            News news = db.News.FirstOrDefault(p => p.Id == id);
+            var news = db.News.FirstOrDefault(p => p.Id == id);
             if (news != null)
                 return View(news);
 
@@ -64,7 +64,7 @@ namespace LiteratorVolgograd.Controllers
         [HttpPost]
         public IActionResult DeleteNews(int id)
         {
-            News news = db.News.Find(id);
+            var news = db.News.Find(id);
             if (news != null)
             {
                 db.News.Remove(news);

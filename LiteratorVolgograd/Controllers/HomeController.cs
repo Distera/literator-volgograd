@@ -34,13 +34,6 @@ namespace LiteratorVolgograd.Controllers
             return View();
         }
 
-        public IActionResult Authors()
-        {
-            ViewData["Message"] = "*Список авторов*";
-
-            return View();
-        }
-
         public IActionResult Projects()
         {
             ViewData["Message"] = "*Список проектов*";
