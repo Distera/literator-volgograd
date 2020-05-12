@@ -1,0 +1,24 @@
+﻿@model LiteratorVolgograd.Models.Author
+
+@{
+    ViewData["Title"] = "Авторы";
+}
+
+<!DOCTYPE html>
+<html>
+<body>
+    Для того, чтобы перейти на персональную страницу автора, выберите интересующую вас фамилию.
+
+    <a class="btn btn-primary float-right" asp-action="ManageAuthor" asp-controller="Authors">Добавить автора</a>
+    <br><br>
+    @foreach (var b in ViewBag.Authors)
+    {
+        <a asp-action="ViewAuthor" asp-controller="Authors" asp-route-id="@b.Id" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">@b.LastName @b.FirstName</h5>
+            </div>
+        </a>
+        <br>
+    }
+</body>
+</html>
