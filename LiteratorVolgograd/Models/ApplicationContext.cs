@@ -6,7 +6,8 @@ namespace LiteratorVolgograd.Models
     {
         public DbSet<Author> Authors { get; set; }
         public DbSet<News> News { get; set; }
-      
+        public DbSet<About> About { get; set; }
+
         public ApplicationContext()
         {
             Database.EnsureCreated();
