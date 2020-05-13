@@ -1,0 +1,41 @@
+﻿@model LiteratorVolgograd.Models.About
+
+<form action="UpdateAbout" method="post" id="form">
+
+    <input type="hidden" value="@Model?.Id" name="Id" />
+
+    <textarea class="form-control" type="text" name="content" style="display:none" id="hiddenArea"></textarea>
+    <div @(true ? "id=quillArea" : "class=ql-editor")>
+        @Html.Raw(Model?.Content)
+    </div>
+    <br />
+
+    <input type="submit" value="Сохранить" class="btn btn-primary" />
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <!-- Initialize Quill editor -->
+    <script>
+        var toolbarOptions = [[{ 'font': [] }],
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }, { 'align': [] }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],
+        [{ 'color': [] }, { 'background': [] }],
+        ['link', 'image', 'video'],
+        ['clean']];
+
+        var quill = new Quill('#quillArea', {
+            modules: {
+                toolbar: toolbarOptions
+            },
+            theme: 'snow'
+        });
+
+        $("#form").on("submit", function () {
+            $("#hiddenArea").val(quill.container.firstElementChild.innerHTML);
+        })
+    </script>
+}

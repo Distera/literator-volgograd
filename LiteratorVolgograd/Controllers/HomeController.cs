@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LiteratorVolgograd.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace LiteratorVolgograd.Controllers
 {
@@ -22,9 +18,29 @@ namespace LiteratorVolgograd.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "*Устав, правление и т.д.*";
+            var about = db.About;
+            if (db.About.Count() == 0)
+            {
+                db.About.Add(new About { Content = ""});
+                db.SaveChanges();
+            }
 
-            return View();
+            return View(about.First());
+        }
+
+        public IActionResult ManageAbout()
+        {
+            return View(db.About.First());
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAbout(string content)
+        {
+            var about = db.About.First();
+            about.Content = content;
+            db.SaveChanges();
+
+            return RedirectToAction("About");
         }
 
         public IActionResult Contact()

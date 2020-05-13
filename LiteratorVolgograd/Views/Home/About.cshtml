@@ -1,4 +1,16 @@
-﻿@{
+﻿@model LiteratorVolgograd.Models.About
+
+@{
     ViewData["Title"] = "О СОЮЗЕ";
 }
-<h3>@ViewData["Message"]</h3>
+
+<form method="get" asp-action="ManageAbout" asp-controller="Home">
+    <input type="submit" value="Редактировать" class="btn btn-primary float-right" />
+
+    <textarea class="form-control" type="text" name="id" style="display:none">@(Model.Id)</textarea>
+
+    <textarea class="form-control" type="text" name="content" style="display:none" id="hiddenArea"></textarea>
+    <div class=ql-editor>
+        @Html.Raw(Model.Content)
+    </div>
+</form>
