@@ -18,14 +18,13 @@ namespace LiteratorVolgograd.Controllers
 
         public IActionResult About()
         {
-            var about = db.About;
             if (db.About.Count() == 0)
             {
                 db.About.Add(new About { Content = ""});
                 db.SaveChanges();
             }
 
-            return View(about.First());
+            return View(db.About.First());
         }
 
         public IActionResult ManageAbout()

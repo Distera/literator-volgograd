@@ -13,10 +13,7 @@ namespace LiteratorVolgograd.Controllers
 
         public IActionResult Index()
         {
-            var authors = db.Authors;
-            ViewBag.Authors = authors.OrderBy(s => s.LastName);
-
-            return View();
+            return View(db.Authors.OrderBy(s => s.LastName));
         }
 
         public IActionResult ManageAuthor(int? id)

@@ -1,4 +1,4 @@
-﻿@model LiteratorVolgograd.Models.Author
+﻿@model IEnumerable<LiteratorVolgograd.Models.Author>
 
 @{
     ViewData["Title"] = "Авторы";
@@ -11,7 +11,7 @@
 
     <a class="btn btn-primary float-right" asp-action="ManageAuthor" asp-controller="Authors">Добавить автора</a>
     <br><br>
-    @foreach (var b in ViewBag.Authors)
+    @foreach (var b in Model)
     {
         <a asp-action="ViewAuthor" asp-controller="Authors" asp-route-id="@b.Id" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
