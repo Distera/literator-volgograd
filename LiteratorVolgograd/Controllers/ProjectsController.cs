@@ -3,29 +3,28 @@ using System.Diagnostics;
 using System.Linq;
 using LiteratorVolgograd.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace LiteratorVolgograd.Controllers
 {
-    public class NewsController : Controller
+    public class ProjectsController : Controller
     {
         const string DefoltTitle = "Без названия";
         private ApplicationContext db = new ApplicationContext();
 
         public IActionResult Index()
         {
-            return View(db.News.OrderByDescending(s => s.Date));
+            return View(db.Projects.OrderByDescending(s => s.Date));
         }
 
-        public IActionResult ManageNews(int? id)
+        public IActionResult ManageProject(int? id)
         {
-            return View(id == null ? null : db.News.FirstOrDefault(n => n.Id == id));
+            return View(id == null ? null : db.Projects.FirstOrDefault(n => n.Id == id));
         }
 
         [HttpPost]
-        public IActionResult AddNews(string title, string content)
+        public IActionResult AddProject(string title, string content)
         {
-            db.News.Add(new News
+            db.Projects.Add(new Project
             {
                 Title = title ?? DefoltTitle,
                 Date = DateTime.Now,
@@ -37,35 +36,35 @@ namespace LiteratorVolgograd.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateNews(int id, string title, string content)
+        public IActionResult UpdateProject(int id, string title, string content)
         {
-            var news = db.News.Find(id);
-
-            news.Title = title ?? DefoltTitle;
-            news.Content = content;
-
+            var projects = db.Projects.Find(id);
+            projects.Title = title ?? DefoltTitle;
+            projects.Content = content;
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
-        public IActionResult ViewNews(int id)
+        public IActionResult ViewProject(int id)
         {
-            var news = db.News.FirstOrDefault(p => p.Id == id);
-            if (news != null)
-                return View(news);
+            var projects = db.Projects.FirstOrDefault(p => p.Id == id);
+            if (projects != null)
+                return View(projects);
 
             return NotFound();
         }
 
         [HttpPost]
-        public IActionResult DeleteNews(int id)
+        public IActionResult DeleteProject(int id)
         {
-            var news = db.News.Find(id);
-            if (news != null)
+            var projects = db.Projects.Find(id);
+            if (projects != null)
             {
-                db.News.Remove(news);
+                db.Projects.Remove(projects);
                 db.SaveChanges();
             }
+
             return RedirectToAction("Index");
         }
 

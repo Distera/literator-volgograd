@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<LiteratorVolgograd.Models.News>
+@{
     ViewData["Title"] = "НОВОСТИ";
 }
 
@@ -7,7 +8,7 @@
 <body>
     <a class="btn btn-primary float-right" asp-action="ManageNews" asp-controller="News">Добавить новость</a>
     <br><br>
-    @foreach (var b in ViewBag.News)
+    @foreach (var b in Model)
     {
         <a asp-action="ViewNews" asp-controller="News" asp-route-id="@b.Id" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">

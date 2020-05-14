@@ -1,0 +1,23 @@
+﻿@model IEnumerable<LiteratorVolgograd.Models.Project>
+@{
+    ViewData["Title"] = "ПРОЕКТЫ";
+}
+
+<!DOCTYPE html>
+<html>
+<body>
+    <a class="btn btn-primary float-right" asp-action="ManageProject" asp-controller="Projects">Добавить проект</a>
+    <br><br>
+    @foreach (var b in Model)
+    {
+        <a asp-action="ViewProject" asp-controller="Projects" asp-route-id="@b.Id" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">@b.Title</h5>
+                <small class="text-muted">@b.Date</small>
+            </div>
+            <p class="mb-1"><span class="badge badge-success">Проекты</span></p>
+        </a>
+        <br>
+    }
+</body>
+</html>
