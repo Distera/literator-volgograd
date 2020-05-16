@@ -1,4 +1,73 @@
-﻿@{
-    ViewData["Title"] = "ГЛАВНОЕ";
-}
-<h3>@ViewData["Message"]</h3>
+﻿@model LiteratorVolgograd.Models.ViewMain
+@using System.Text.RegularExpressions;
+<!DOCTYPE html>
+<html>
+<body>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="list-group">
+                <h4>Наши авторы</h4><br>
+                @foreach (var b in Model.Author)
+                {
+                    <a asp-action="ViewAuthor" asp-controller="Authors" asp-route-id="@b.Id" class="list-group-item list-group-item-action">
+                        @b.LastName @b.FirstName
+                    </a>
+                }
+            </div>
+        </div>
+        <div class="col">
+            <div class="list-group">
+                <h4>Наши публикации</h4><br>
+                @foreach (var b in Model.Publication)
+                {
+                    <a asp-action="ViewPublication" asp-controller="Publications" asp-route-id="@b.Id" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">@b.Title</h5>
+                        </div>
+                        <small><span class="badge badge-secondary">Публикации</span></small>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+    <br>
+    <h4>Последние обновления на сайте</h4><br>
+    <div class="card-group">
+        @foreach (var b in Model.News)
+        {
+            var foundPicture = Regex.Match(b.Content, "<img src=\"(.+?)\"").Groups[1].Value;
+
+            <div class="card">
+                <img class="card-img-top" src=@(foundPicture == "" ? "/images/no_photo.png" : foundPicture) alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@b.Title</h5>
+                    <p class="card-text"><span class="badge badge-info">Новости</span></p>
+                    <p class="card-text"><small class="text-muted">@b.Date</small></p>
+                    <a asp-action="ViewNews" asp-controller="News" asp-route-id="@b.Id">
+                        <p class="card-text">Подробнее...</p>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+    <br>
+    <div class="card-group">
+        @foreach (var b in Model.Project)
+        {
+            var foundPicture = Regex.Match(b.Content, "<img src=\"(.+?)\"").Groups[1].Value;
+
+            <div class="card">
+                <img class="card-img-top" src=@(foundPicture == "" ? "/images/no_photo.png" : foundPicture) alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@b.Title</h5>
+                    <p class="card-text"><span class="badge badge-success">Проекты</span></p>
+                    <p class="card-text"><small class="text-muted">@b.Date</small></p>
+                    <a asp-action="ViewProject" asp-controller="Projects" asp-route-id="@b.Id">
+                        <p class="card-text">Подробнее...</p>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

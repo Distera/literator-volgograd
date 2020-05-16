@@ -2,18 +2,31 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using LiteratorVolgograd.Models;
+using System.Collections.Generic;
+using System;
+using System.Text.RegularExpressions;
 
 namespace LiteratorVolgograd.Controllers
 {
     public class HomeController : Controller
     {
+        const int ProjectRecordsCount = 4;
+        const int NewsRecordsCount = 3;
+        const int AuthorRecordsCount = 5;
+        const int PublicationRecordsCount = 3;
         private ApplicationContext db = new ApplicationContext();
 
         public IActionResult Index()
         {
-            ViewData["Message"] = "*Последние посты из всех разделов*";
+            var viewMain = new ViewMain()
+            {
+                Project = db.Projects.OrderByDescending(x => x.Date).Take(ProjectRecordsCount).ToList(),
+                News = db.News.OrderByDescending(x => x.Date).Take(NewsRecordsCount).ToList(),
+                Author = db.Authors.OrderBy(x => Guid.NewGuid()).Take(AuthorRecordsCount).ToList(),
+                Publication = db.Publications.OrderBy(x => Guid.NewGuid()).Take(PublicationRecordsCount).ToList()
+            };
 
-            return View();
+            return View(viewMain);
         }
 
         public IActionResult About()
@@ -45,20 +58,6 @@ namespace LiteratorVolgograd.Controllers
         public IActionResult Contact()
         {
             ViewData["Message"] = "*Контакты: почта, телефон и т.д.*";
-
-            return View();
-        }
-
-        public IActionResult Projects()
-        {
-            ViewData["Message"] = "*Список проектов*";
-
-            return View();
-        }
-
-        public IActionResult Publications()
-        {
-            ViewData["Message"] = "*Список публикаций*";
 
             return View();
         }
