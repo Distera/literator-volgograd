@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using LiteratorVolgograd.Controllers;
+using LiteratorVolgograd.Models;
+using LiteratorVolgograd.Service;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,7 +30,36 @@ namespace LiteratorVolgograd
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddDbContext<ApplicationContext>(x => x.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services
+                .AddIdentity<IdentityUser, IdentityRole>(opts =>
+                {
+                    opts.User.RequireUniqueEmail = true;
+                    opts.Password.RequiredLength = 6;
+                    opts.Password.RequireNonAlphanumeric = false;
+                    opts.Password.RequireLowercase = false;
+                    opts.Password.RequireUppercase = false;
+                    opts.Password.RequireDigit = false;
+                })
+                .AddEntityFrameworkStores<ApplicationContext>()
+                .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "auth";
+                options.Cookie.HttpOnly = true;
+                options.LoginPath = "/account/login";
+                options.SlidingExpiration = true;
+            });
+
+            const string adminPolicyName = "AdminPolicy";
+            services.AddAuthorization(x => x.AddPolicy(adminPolicyName, policy => policy.RequireRole("admin")));
+
+            services.AddMvc(x =>
+                {
+                    x.Conventions.Add(new AdminAuthorization(adminPolicyName));
+                }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +78,8 @@ namespace LiteratorVolgograd
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

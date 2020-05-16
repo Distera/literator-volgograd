@@ -4,13 +4,20 @@ using LiteratorVolgograd.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LiteratorVolgograd.Controllers
 {
     public class AuthorsController : Controller
     {
-        private ApplicationContext db = new ApplicationContext();
+        private readonly ApplicationContext db;
 
+        public AuthorsController(ApplicationContext context)
+        {
+	        db = context;
+        }
+
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(db.Authors.OrderBy(s => s.LastName));
@@ -21,6 +28,7 @@ namespace LiteratorVolgograd.Controllers
             return View(id == null ? null : db.Authors.FirstOrDefault(n => n.Id == id));
         }
 
+        [AllowAnonymous]
         public IActionResult ViewAuthor(int id)
         {
             var authors = db.Authors.FirstOrDefault(p => p.Id == id);
@@ -71,6 +79,7 @@ namespace LiteratorVolgograd.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

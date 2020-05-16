@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using LiteratorVolgograd.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiteratorVolgograd.Controllers
@@ -8,8 +9,14 @@ namespace LiteratorVolgograd.Controllers
     public class PublicationsController : Controller
     {
         const string DefoltTitle = "Без названия";
-        private ApplicationContext db = new ApplicationContext();
+        private readonly ApplicationContext db;
 
+        public PublicationsController(ApplicationContext context)
+        {
+            db = context;
+        }
+
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(db.Publications.OrderBy(s => s.Title));
@@ -45,6 +52,7 @@ namespace LiteratorVolgograd.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowAnonymous]
         public IActionResult ViewPublication(int id)
         {
             var publication = db.Publications.FirstOrDefault(p => p.Id == id);
@@ -66,6 +74,7 @@ namespace LiteratorVolgograd.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
