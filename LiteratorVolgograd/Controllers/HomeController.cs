@@ -5,6 +5,7 @@ using LiteratorVolgograd.Models;
 using System.Collections.Generic;
 using System;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LiteratorVolgograd.Controllers
 {
@@ -14,8 +15,14 @@ namespace LiteratorVolgograd.Controllers
         const int NewsRecordsCount = 3;
         const int AuthorRecordsCount = 5;
         const int PublicationRecordsCount = 3;
-        private ApplicationContext db = new ApplicationContext();
+        private readonly ApplicationContext db;
 
+        public HomeController(ApplicationContext context)
+        {
+	        db = context;
+        }
+
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var viewMain = new ViewMain()
@@ -29,6 +36,7 @@ namespace LiteratorVolgograd.Controllers
             return View(viewMain);
         }
 
+        [AllowAnonymous]
         public IActionResult About()
         {
             if (db.About.Count() == 0)
@@ -55,6 +63,7 @@ namespace LiteratorVolgograd.Controllers
             return RedirectToAction("About");
         }
 
+        [AllowAnonymous]
         public IActionResult Contact()
         {
             ViewData["Message"] = "*Контакты: почта, телефон и т.д.*";
@@ -62,6 +71,7 @@ namespace LiteratorVolgograd.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

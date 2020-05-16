@@ -3,15 +3,17 @@ using System;
 using LiteratorVolgograd.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LiteratorVolgograd.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20200516165823_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,10 +120,6 @@ namespace LiteratorVolgograd.Migrations
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new { Id = "6f6f6191-bafc-4f12-bf9a-e55f535de420", ConcurrencyStamp = "e55a11ba-5a94-461b-8b66-0f1de45b2e8d", Name = "admin", NormalizedName = "ADMIN" }
-                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -191,10 +189,6 @@ namespace LiteratorVolgograd.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new { Id = "9288117a-2d5a-4baa-aed3-20d64a824edc", AccessFailedCount = 0, ConcurrencyStamp = "39cd1e02-ad3c-488e-bc65-fd7a89c9aa75", Email = "admin@email.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "ADMIN@EMAIL.COM", NormalizedUserName = "ADMIN", PasswordHash = "AQAAAAEAACcQAAAAEFat+RECT4bwlNGfEbXguHQKLWwNLSSiWPgQUotLUS2Avw2mlOnadsZqV0e7q6fAxg==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "admin" }
-                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -245,10 +239,6 @@ namespace LiteratorVolgograd.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
-
-                    b.HasData(
-                        new { UserId = "9288117a-2d5a-4baa-aed3-20d64a824edc", RoleId = "6f6f6191-bafc-4f12-bf9a-e55f535de420" }
-                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
