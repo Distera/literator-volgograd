@@ -8,6 +8,7 @@ namespace LiteratorVolgograd.Models
         public DbSet<News> News { get; set; }
         public DbSet<About> About { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Publication> Publications { get; set; }
 
         public ApplicationContext()
         {

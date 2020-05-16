@@ -62,6 +62,10 @@ namespace LiteratorVolgograd
                 routes.MapRoute(
                     name: "projects",
                     template: "{controller=Projects}/{action=Projects}/{id?}");
+
+                routes.MapRoute(
+                    name: "publications",
+                    template: "{controller=Publications}/{action=Publications}/{id?}");
             });
         }
     }
