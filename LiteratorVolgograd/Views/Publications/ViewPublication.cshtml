@@ -1,0 +1,15 @@
+﻿@model LiteratorVolgograd.Models.Publication
+
+<form method="get" asp-action="ManagePublication" asp-controller="Publications">
+    <input type="submit" value="Редактировать" class="btn btn-primary float-right" />
+
+    <h4>@(Model.Title)</h4>
+
+    <textarea class="form-control" type="text" name="id" style="display:none">@(Model.Id)</textarea>
+
+    <textarea class="form-control" type="text" name="content" style="display:none" id="hiddenArea"></textarea>
+    <div class=ql-editor>
+        @Html.Raw(Model.Content)
+    </div>
+    <br />
+</form>

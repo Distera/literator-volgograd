@@ -1,0 +1,23 @@
+﻿@model IEnumerable<LiteratorVolgograd.Models.Publication>
+
+@{
+    ViewData["Title"] = " ПУБЛИКАЦИИ";
+}
+
+<!DOCTYPE html>
+<html>
+<body>
+    <a class="btn btn-primary float-right" asp-action="ManagePublication" asp-controller="Publications">Добавить публикацию</a>
+    <br><br>
+    @foreach (var b in Model)
+    {
+        <a asp-action="ViewPublication" asp-controller="Publications" asp-route-id="@b.Id" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">@b.Title</h5>
+            </div>
+            <p class="mb-1"><span class="badge badge-secondary">Публикации</span></p>
+        </a>
+        <br>
+    }
+</body>
+</html>
