@@ -1,5 +1,4 @@
-﻿using LiteratorVolgograd.Controllers;
-using LiteratorVolgograd.Models;
+﻿using LiteratorVolgograd.Models;
 using LiteratorVolgograd.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -63,8 +62,10 @@ namespace LiteratorVolgograd
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationContext dataContext)
         {
+            dataContext.Database.Migrate();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

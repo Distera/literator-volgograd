@@ -14,7 +14,7 @@ namespace LiteratorVolgograd.Controllers
 
         public ProjectsController(ApplicationContext context)
         {
-	        db = context;
+            db = context;
         }
 
         [AllowAnonymous]
